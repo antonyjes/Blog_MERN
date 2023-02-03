@@ -1,0 +1,12 @@
+.title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.form-login{
+    padding: 5rem;
+}
