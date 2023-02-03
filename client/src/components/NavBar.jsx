@@ -1,14 +1,20 @@
 import "../styles/NavBar.css";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setLogout } from "state";
 
 const NavBar = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-home">
-      <p class="navbar-brand" href="#">
-        Navbar
+    <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-home">
+      <p className="navbar-brand" onClick={() => navigate("/home")} role="button">
+        Blog 1.0
       </p>
       <div className="links-section">
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNav"
@@ -16,34 +22,34 @@ const NavBar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <p class="nav-link" href="#">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item" onClick={() => navigate("/home")} role="button">
+              <p className="nav-link">
                 Home
               </p>
             </li>
-            <li class="nav-item">
-              <p class="nav-link" href="#">
+            <li className="nav-item">
+              <p className="nav-link" href="#">
                 Favorites
               </p>
             </li>
-            <li class="nav-item">
-              <p class="nav-link" href="#">
+            <li className="nav-item">
+              <p className="nav-link" href="#">
                 Profile
               </p>
             </li>
-            <li class="nav-item">
-              <p class="nav-link" href="#">
+            <li className="nav-item">
+              <p className="nav-link" href="#">
                 Friends
               </p>
             </li>
           </ul>
         </div>
 
-        <button class="btn btn-outline-success" type="submit">
+        <button className="btn btn-outline-success" onClick={() => dispatch(setLogout())}>
           Log out
         </button>
       </div>

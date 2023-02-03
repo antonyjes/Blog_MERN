@@ -86,34 +86,34 @@ const LoginPage = () => {
         {isRegister && (
           <>
             <div className="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">
+              <label className="form-label">
                 First Name
               </label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
             <div className="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">
+              <label className="form-label">
                 Last Name
               </label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
             <div className="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">
+              <label className="form-label">
                 Location
               </label>
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
@@ -139,24 +139,24 @@ const LoginPage = () => {
           </>
         )}
         <div className="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">
+          <label className="form-label">
             Email address
           </label>
           <input
             type="email"
-            class="form-control"
+            className="form-control"
             placeholder="name@example.com"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">
+        <div className="mb-3">
+          <label className="form-label">
             Password
           </label>
           <input
             type="password"
-            class="form-control"
+            className="form-control"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
