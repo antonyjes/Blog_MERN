@@ -31,17 +31,17 @@ const NavBar = () => {
                 Home
               </p>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" role="button">
               <p className="nav-link" href="#">
                 Favorites
               </p>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" role="button">
               <p className="nav-link" href="#">
                 Profile
               </p>
             </li>
-            <li className="nav-item">
+            <li className="nav-item" role="button">
               <p className="nav-link" href="#">
                 Friends
               </p>

@@ -1,12 +1,15 @@
 import { useSelector } from "react-redux"
+import CardProfile from "./CardProfile";
 import NavBar from "./NavBar";
 
 const HomePage = () => {
-    const user = useSelector((state) => state.user);
+    const {_id, picturePath} = useSelector((state) => state.user);
     return(
         <div>
             <NavBar />
-            Welcome {user.firstName} {user.lastName}!
+            <div>
+                <CardProfile userId={_id} picturePath={picturePath}/>
+            </div>
         </div>
     )
 }
