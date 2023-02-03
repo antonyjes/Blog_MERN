@@ -1,0 +1,10 @@
+.navbar-home{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.links-section{
+  display: flex;
+  flex-direction: row;
+}
