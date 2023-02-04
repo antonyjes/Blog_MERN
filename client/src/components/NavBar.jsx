@@ -41,9 +41,9 @@ const NavBar = () => {
                 Profile
               </p>
             </li>
-            <li className="nav-item" role="button">
+            <li className="nav-item" role="button" onClick={() => navigate("/createPost")}>
               <p className="nav-link" href="#">
-                Friends
+                Create Post
               </p>
             </li>
           </ul>
