@@ -29,7 +29,7 @@ const CardProfile = ({ userId, picturePath }) => {
 
   return (
     <div className="card">
-      <div>
+      <div onClick={() => navigate(`/profile/${userId}`)} role="button">
         <div className="user-image">
           <img src={`http://localhost:3002/assets/${picturePath}`} alt="user" />
         </div>
