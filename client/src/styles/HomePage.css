@@ -1,0 +1,12 @@
+.container-home{
+    display: grid;;
+    grid-template-columns: 1fr 3fr;
+}
+
+.container-card{
+    padding: 2rem;
+}
+
+.container-posts{
+    padding: 2rem;
+}

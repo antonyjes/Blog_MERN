@@ -4,14 +4,15 @@ import { useParams } from "react-router-dom";
 import CardProfile from "./CardProfile";
 import NavBar from "./NavBar";
 import Posts from "./Posts";
+import "../styles/HomePage.css";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const { userId } = useParams();
   const token = useSelector((state) => state.token);
 
-  const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+  const getUser = async (e) => {
+    const response = await fetch(`http://localhost:3002/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -28,9 +29,13 @@ const Profile = () => {
   return (
     <div>
       <NavBar />
-      <div>
-        <CardProfile userId={userId} picturePath={user.picturePath} />
-        <Posts userId={userId} isProfile />
+      <div className="container-home">
+        <div className="container-card">
+          <CardProfile userId={userId} picturePath={user.picturePath} />
+        </div>
+        <div className="container-posts">
+          <Posts userId={userId} isProfile />
+        </div>
       </div>
     </div>
   );

@@ -1,21 +1,24 @@
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 import CardProfile from "./CardProfile";
 import NavBar from "./NavBar";
 import Posts from "./Posts";
+import "../styles/HomePage.css";
 
 const HomePage = () => {
-    const {_id, picturePath} = useSelector((state) => state.user);
-    return(
-        <div>
-            <NavBar />
-            <div>
-                <CardProfile userId={_id} picturePath={picturePath}/>
-                <div>                    
-                    <Posts />
-                </div>
-            </div>
+  const { _id, picturePath } = useSelector((state) => state.user);
+  return (
+    <div>
+      <NavBar />
+      <div className="container-home">
+        <div className="container-card">
+          <CardProfile userId={_id} picturePath={picturePath} />
         </div>
-    )
-}
+        <div className="container-posts">
+          <Posts />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default HomePage;

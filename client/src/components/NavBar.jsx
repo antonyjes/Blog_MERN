@@ -1,11 +1,12 @@
 import "../styles/NavBar.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setLogout } from "state";
 
 const NavBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light navbar-home">
@@ -36,7 +37,7 @@ const NavBar = () => {
                 Favorites
               </p>
             </li>
-            <li className="nav-item" role="button">
+            <li className="nav-item" role="button" onClick={() => navigate(`/profile/${user._id}`)}>
               <p className="nav-link" href="#">
                 Profile
               </p>
