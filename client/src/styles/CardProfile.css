@@ -9,3 +9,11 @@
     width: 160px;
     height: 160px;
 }
+
+.card-image{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
+}
