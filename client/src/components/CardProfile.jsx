@@ -34,9 +34,9 @@ const CardProfile = ({ userId, picturePath }) => {
           <img src={`http://localhost:3002/assets/${picturePath}`} alt="user" />
         </div>
         <div>
-          <p>
+          <h2>
             {firstName} {lastName}
-          </p>
+          </h2>
         </div>
       </div>
 

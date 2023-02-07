@@ -47,8 +47,6 @@ const Posts = ({ userId, isProfile = false }) => {
           lastName,
           title,
           summary,
-          content,
-          location,
           picturePath,
           userPicturePath,
           likes,
@@ -61,8 +59,6 @@ const Posts = ({ userId, isProfile = false }) => {
             name={`${firstName} ${lastName}`}
             title={title}
             summary={summary}
-            content={content}
-            location={location}
             picturePath={picturePath}
             userPicturePath={userPicturePath}
             likes={likes}

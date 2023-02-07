@@ -1,0 +1,38 @@
+.container-post{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.container-user{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container-user div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.container-user div img{
+    object-fit: cover;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.container-content{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.content-img img{
+    width: 350px;
+    height: 200px;
+    object-fit: cover;
+}

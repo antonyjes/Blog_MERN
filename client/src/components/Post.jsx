@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "state";
+import { useNavigate } from "react-router-dom";
+import { setFriends, setPost } from "state";
+import "../styles/Post.css";
 
 const Post = ({
   postId,
@@ -7,18 +9,34 @@ const Post = ({
   name,
   title,
   summary,
-  content,
-  location,
   picturePath,
   userPicturePath,
   likes,
   comments,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
+  const friends = useSelector((state) => state.user.friends);
+  const isFriend = friends.find((friend) => friend._id === postUserId);
+
+  const patchFriend = async () => {
+    const response = await fetch(
+      `http://localhost:3002/users/${loggedInUserId}/${postUserId}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    dispatch(setFriends({ friends: data }));
+  };
 
   const setLike = async () => {
     const response = await fetch(`http://localhost:3002/posts/${postId}/like`, {
@@ -34,14 +52,36 @@ const Post = ({
   };
 
   return (
-    <div>
-      <div>
-        <h2>{name}</h2>
-        <h4>{location}</h4>
+    <div className="container-post">
+      <div className="container-user">
+        <div
+          role="button"
+          onClick={() => {
+            navigate(`/profile/${postUserId}`);
+            navigate(0);
+          }}
+        >
+          <div>
+            <img
+              src={`http://localhost:3002/assets/${userPicturePath}`}
+              alt=""
+            />
+          </div>
+          <h4>{name}</h4>
+        </div>
+
+        <button onClick={() => patchFriend()}>
+          {isFriend ? <p>Delete friend</p> : <p>Add friend</p>}
+        </button>
       </div>
-      <div>
-        <h2>{title}</h2>
-        <h4>{summary}</h4>
+      <div className="container-content">
+        <div className="content-img">
+          <img src={`http://localhost:3002/assets/${picturePath}`} alt="post" />
+        </div>
+        <div>
+          <h3>{title}</h3>
+          <h5>{summary}</h5>
+        </div>
       </div>
     </div>
   );
