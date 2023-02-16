@@ -5,6 +5,9 @@
 
 .container-card{
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .container-posts{

@@ -7,6 +7,7 @@ const CardProfile = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.token);
   const navigate = useNavigate();
+  const friendsLength = useSelector((state) => state.user.friends);
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:3002/users/${userId}`, {
@@ -25,7 +26,7 @@ const CardProfile = ({ userId, picturePath }) => {
     return null;
   }
 
-  const { firstName, lastName, location, impressions, friends } = user;
+  const { firstName, lastName, location, impressions } = user;
 
   return (
     <div className="card">
@@ -43,7 +44,7 @@ const CardProfile = ({ userId, picturePath }) => {
       <ul className="list-group list-group-flush">
         <li className="list-group-item">Location: {location}</li>
         <li className="list-group-item">Impressions: {impressions}</li>
-        <li className="list-group-item">Friends: {friends.length}</li>
+        <li className="list-group-item">Friends: {friendsLength.length}</li>
       </ul>
     </div>
   );
