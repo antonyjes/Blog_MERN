@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "state";
+import '../styles/FriendList.css';
 
 const FriendList = ({ userId }) => {
   const dispatch = useDispatch();
@@ -28,11 +29,11 @@ const FriendList = ({ userId }) => {
       <h4>Friend List</h4>
       <div>
         {friends.map((friend) => (
-          <div key={friend._id}>
+          <div key={friend._id} className="friend-cont">
             <h5>
               {friend.firstName} {friend.lastName}
             </h5>
-            <div>
+            <div className="image-cont">
               <img
                 src={`http://localhost:3002/assets/${friend.picturePath}`}
                 alt=""
