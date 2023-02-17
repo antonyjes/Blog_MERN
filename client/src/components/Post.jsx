@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setFriends, setPost } from "state";
+import { setFriends } from "state";
 import "../styles/Post.css";
 
 const Post = ({
@@ -11,16 +11,12 @@ const Post = ({
   summary,
   picturePath,
   userPicturePath,
-  likes,
-  comments,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const user = useSelector((state) => state.user);
   const loggedInUserId = useSelector((state) => state.user._id);
-  const isLiked = Boolean(likes[loggedInUserId]);
-  const likeCount = Object.keys(likes).length;
   const friends = useSelector((state) => state.user.friends);
   const isFriend = friends.find((friend) => friend._id === postUserId);
 
@@ -37,19 +33,6 @@ const Post = ({
     );
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
-  };
-
-  const setLike = async () => {
-    const response = await fetch(`http://localhost:3002/posts/${postId}/like`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: loggedInUserId }),
-    });
-    const updatedPost = await response.json();
-    dispatch(setPost({ post: updatedPost }));
   };
 
   return (
@@ -76,7 +59,14 @@ const Post = ({
           </button>
         )}
       </div>
-      <div className="container-content">
+      <div
+        className="container-content"
+        role="button"
+        onClick={() => {
+          navigate(`/post/${postId}`);
+          navigate(0);
+        }}
+      >
         <div className="content-img">
           <img src={`http://localhost:3002/assets/${picturePath}`} alt="post" />
         </div>
