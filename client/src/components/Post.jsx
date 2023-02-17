@@ -17,6 +17,7 @@ const Post = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
+  const user = useSelector((state) => state.user);
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
@@ -69,10 +70,11 @@ const Post = ({
           </div>
           <h4>{name}</h4>
         </div>
-
-        <button onClick={() => patchFriend()}>
-          {isFriend ? <p>Delete friend</p> : <p>Add friend</p>}
-        </button>
+        {postUserId !== user._id && (
+          <button onClick={() => patchFriend()}>
+            {isFriend ? <p>Delete friend</p> : <p>Add friend</p>}
+          </button>
+        )}
       </div>
       <div className="container-content">
         <div className="content-img">
