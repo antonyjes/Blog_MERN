@@ -9,6 +9,8 @@ const PostPage = () => {
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
   const [showComments, setShowComments] = useState(false);
+  const [addComment, setAddComment] = useState(false);
+  const [comment, setComment] = useState('');
 
   const getPost = async (e) => {
     const response = await fetch(`http://localhost:3002/posts/${postId}`, {
@@ -42,6 +44,20 @@ const PostPage = () => {
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
 
+  const handleComment = async (e) => {
+    e.preventDefault();
+    const response = await fetch(`http://localhost:3002/posts/${postId}/comment`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({comment: comment, userId: loggedInUserId }),
+    });
+    const updatedPost = await response.json();
+    setPost(updatedPost);
+  }
+
   return (
     <div>
       <NavBar />
@@ -69,6 +85,15 @@ const PostPage = () => {
         </div>
         {showComments ? (
           <div>
+            <button onClick={() => setAddComment(!addComment)}>
+              Add Comment
+            </button>
+            {addComment ? (
+              <div>
+                <input type="text" value={comment} onChange={(e) => setComment(e.target.value)}/>
+                <button onClick={handleComment}>Send</button>
+              </div>
+            ) : null}
             <p>Buen post</p>
             <p>Cameo</p>
           </div>
