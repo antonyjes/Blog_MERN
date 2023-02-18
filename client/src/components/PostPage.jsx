@@ -94,8 +94,14 @@ const PostPage = () => {
                 <button onClick={handleComment}>Send</button>
               </div>
             ) : null}
-            <p>Buen post</p>
-            <p>Cameo</p>
+            {
+              post.comments.map(({comment, userId}) => (
+                <div>
+                  <p>{userId}</p>
+                  <p>{comment}</p>
+                </div>
+              ))
+            }
           </div>
         ) : null}
       </div>
