@@ -8,6 +8,7 @@ const PostPage = () => {
   const { postId } = useParams();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
+  const [showComments, setShowComments] = useState(false);
 
   const getPost = async (e) => {
     const response = await fetch(`http://localhost:3002/posts/${postId}`, {
@@ -19,24 +20,24 @@ const PostPage = () => {
   };
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:3002/posts/${postId}/like`,{
+    const response = await fetch(`http://localhost:3002/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({userId: loggedInUserId}),
+      body: JSON.stringify({ userId: loggedInUserId }),
     });
     const updatedPost = await response.json();
     setPost(updatedPost);
-  }
+  };
 
   useEffect(() => {
     getPost();
-  }, []); // eslint-disable-line  
+  }, []); // eslint-disable-line
 
   if (!post) return null;
-  
+
   const likes = post.likes;
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
@@ -56,14 +57,22 @@ const PostPage = () => {
           <h5>{post.content}</h5>
         </div>
         <div>
-          <div>
+          <div onClick={() => setShowComments(!showComments)}>
             <h6>Comments: {post.comments.length}</h6>
           </div>
           <div>
-            <button onClick={patchLike}>{isLiked ? <h6>Dislike</h6> : <h6>Like</h6>}</button>
+            <button onClick={patchLike}>
+              {isLiked ? <h6>Dislike</h6> : <h6>Like</h6>}
+            </button>
             <h6>Likes: {likeCount}</h6>
           </div>
         </div>
+        {showComments ? (
+          <div>
+            <p>Buen post</p>
+            <p>Cameo</p>
+          </div>
+        ) : null}
       </div>
     </div>
   );
