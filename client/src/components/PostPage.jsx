@@ -12,7 +12,7 @@ const PostPage = () => {
   const loggedInUserId = useSelector((state) => state.user._id);
   const [showComments, setShowComments] = useState(false);
   const [addComment, setAddComment] = useState(false);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const getPost = async (e) => {
     const response = await fetch(`http://localhost:3002/posts/${postId}`, {
@@ -48,17 +48,20 @@ const PostPage = () => {
 
   const handleComment = async (e) => {
     e.preventDefault();
-    const response = await fetch(`http://localhost:3002/posts/${postId}/comment`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({comment: comment, userId: loggedInUserId }),
-    });
+    const response = await fetch(
+      `http://localhost:3002/posts/${postId}/comment`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ comment: comment, userId: loggedInUserId }),
+      }
+    );
     const updatedPost = await response.json();
     setPost(updatedPost);
-  }
+  };
 
   return (
     <div>
@@ -84,26 +87,33 @@ const PostPage = () => {
             </button>
             <h6>Likes: {likeCount}</h6>
           </div>
-        </div>        
+        </div>
       </div>
       {showComments ? (
-          <div className="comments">
-            <button onClick={() => setAddComment(!addComment)} className="add-comment">
-              Add Comment
-            </button>
-            {addComment ? (
-              <div className="input-comment">
-                <input type="text" value={comment} onChange={(e) => setComment(e.target.value)}/>
-                <button onClick={handleComment}>Send</button>
-              </div>
-            ) : null}
-            {
-              post.comments.map(({comment, userId}) => (
-                <Comment comment={comment} userId={userId}/>
-              ))
-            }
+        <div className="comments">
+          <button
+            onClick={() => setAddComment(!addComment)}
+            className="add-comment"
+          >
+            Add Comment
+          </button>
+          {addComment ? (
+            <div className="input-comment">
+              <input
+                type="text"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <button onClick={handleComment}>Send</button>
+            </div>
+          ) : null}
+          <div className="comments-text">
+            {post.comments.map(({ comment, userId }) => (
+              <Comment comment={comment} userId={userId} />
+            ))}
           </div>
-        ) : null}
+        </div>
+      ) : null}
     </div>
   );
 };

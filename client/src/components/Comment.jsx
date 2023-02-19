@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import "../styles/Comment.css";
 
 const Comment = ({comment, userId}) => {
     const [user, setUser] = useState(null);
@@ -21,9 +22,9 @@ const Comment = ({comment, userId}) => {
     if (!user) return null;
 
     return(
-        <div>
-            <p>{user.firstName} {user.lastName}</p>
-            <p>{comment}</p>
+        <div className="comment-section">
+            <h5>{user.firstName} {user.lastName}</h5>
+            <h6>{comment}</h6>
         </div>
     )
 }
