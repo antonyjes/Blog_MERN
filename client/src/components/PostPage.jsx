@@ -74,11 +74,11 @@ const PostPage = () => {
           <h3>{post.title}</h3>
           <h5>{post.content}</h5>
         </div>
-        <div>
-          <div onClick={() => setShowComments(!showComments)}>
+        <div className="comments-likes">
+          <div onClick={() => setShowComments(!showComments)} role="button">
             <h6>Comments: {post.comments.length}</h6>
           </div>
-          <div>
+          <div className="likes">
             <button onClick={patchLike}>
               {isLiked ? <h6>Dislike</h6> : <h6>Like</h6>}
             </button>
