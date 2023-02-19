@@ -42,3 +42,27 @@
     align-items: center;
     gap: 1rem;
 }
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    width: 100%;
+}
+
+.add-comment{
+    display: flex;
+    width: 25%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-comment{
+    display: flex;
+    width: 25%;
+    flex-direction: row;
+    margin: 1rem auto;
+    align-items: center;
+    justify-content: center;
+}

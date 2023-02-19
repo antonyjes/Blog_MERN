@@ -84,14 +84,15 @@ const PostPage = () => {
             </button>
             <h6>Likes: {likeCount}</h6>
           </div>
-        </div>
-        {showComments ? (
-          <div>
-            <button onClick={() => setAddComment(!addComment)}>
+        </div>        
+      </div>
+      {showComments ? (
+          <div className="comments">
+            <button onClick={() => setAddComment(!addComment)} className="add-comment">
               Add Comment
             </button>
             {addComment ? (
-              <div>
+              <div className="input-comment">
                 <input type="text" value={comment} onChange={(e) => setComment(e.target.value)}/>
                 <button onClick={handleComment}>Send</button>
               </div>
@@ -103,7 +104,6 @@ const PostPage = () => {
             }
           </div>
         ) : null}
-      </div>
     </div>
   );
 };
