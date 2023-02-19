@@ -50,7 +50,7 @@ const NavBar = () => {
           </ul>
         </div>
 
-        <button className="btn btn-outline-success" onClick={() => dispatch(setLogout())}>
+        <button className="btn btn-outline-success btn-logout" onClick={() => dispatch(setLogout())}>
           Log out
         </button>
       </div>

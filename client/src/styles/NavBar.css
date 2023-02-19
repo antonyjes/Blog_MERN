@@ -8,3 +8,11 @@
   display: flex;
   flex-direction: row;
 }
+
+.navbar-nav .nav-item p{
+  margin-bottom: 0;
+}
+
+.btn-logout{
+  margin-left: .5rem;
+}

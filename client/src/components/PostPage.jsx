@@ -95,7 +95,7 @@ const PostPage = () => {
             onClick={() => setAddComment(!addComment)}
             className="add-comment"
           >
-            Add Comment
+            {addComment ? "Hide" : "Add comment"}
           </button>
           {addComment ? (
             <div className="input-comment">
