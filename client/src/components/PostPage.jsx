@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Comment from "./Comment";
 import NavBar from "./NavBar";
+import "../styles/PostPage.css";
 
 const PostPage = () => {
   const [post, setPost] = useState(null);
@@ -62,14 +63,14 @@ const PostPage = () => {
   return (
     <div>
       <NavBar />
-      <div>
+      <div className="post-container">
         <div>
           <img
             src={`http://localhost:3002/assets/${post.picturePath}`}
             alt=""
           />
         </div>
-        <div>
+        <div className="content">
           <h3>{post.title}</h3>
           <h5>{post.content}</h5>
         </div>
