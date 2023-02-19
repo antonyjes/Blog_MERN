@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Comment from "./Comment";
 import NavBar from "./NavBar";
 
 const PostPage = () => {
@@ -96,10 +97,7 @@ const PostPage = () => {
             ) : null}
             {
               post.comments.map(({comment, userId}) => (
-                <div>
-                  <p>{userId}</p>
-                  <p>{comment}</p>
-                </div>
+                <Comment comment={comment} userId={userId}/>
               ))
             }
           </div>

@@ -21,6 +21,7 @@ const SubmitPost = () => {
     formData.append("userId", _id);
     formData.append("title", title);
     formData.append("summary", summary);
+    formData.append("content", content);
     formData.append("picture", fileValue);
     formData.append("picturePath", fileValue.name);
     e.preventDefault();
