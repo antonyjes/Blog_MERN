@@ -32,7 +32,7 @@ const NavBar = () => {
                 Home
               </p>
             </li>
-            <li className="nav-item" role="button">
+            <li className="nav-item" onClick={() => navigate(`/favorites/${user._id}`)} role="button">
               <p className="nav-link" href="#">
                 Favorites
               </p>

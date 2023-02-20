@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import SubmitPost from "components/SubmitPost";
 import Profile from "components/Profile";
 import PostPage from "components/PostPage";
+import Favorites from "components/Favorites";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
@@ -29,6 +30,10 @@ function App() {
           <Route
             path="/post/:postId"
             element={isAuth ? <PostPage /> : <Navigate to="/" />} 
+          />
+          <Route 
+            path="/favorites/:userId"
+            element={isAuth ? <Favorites /> : <Navigate to="/" />}
           />
         </Routes>
       </BrowserRouter>
