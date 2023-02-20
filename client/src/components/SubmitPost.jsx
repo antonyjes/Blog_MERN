@@ -4,6 +4,7 @@ import { useState } from "react";
 import Dropzone from "react-dropzone";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
+import "../styles/SubmitPost.css";
 
 const SubmitPost = () => {
   const navigate = useNavigate();
@@ -39,8 +40,8 @@ const SubmitPost = () => {
   return (
     <div>
       <NavBar />
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+      <form onSubmit={handleSubmit} className="container-form">
+        <div className="mb-3 form-item">
           <label htmlFor="">Title</label>
           <input
             type="text"
@@ -49,7 +50,7 @@ const SubmitPost = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-3 form-item">
           <label htmlFor="">Summary</label>
           <input
             type="text"
@@ -58,7 +59,7 @@ const SubmitPost = () => {
             onChange={(e) => setSummary(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className="mb-3 form-item">
           <label htmlFor="">Content</label>
           <textarea
             name=""
@@ -69,7 +70,7 @@ const SubmitPost = () => {
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
         </div>
-        <div className="mb-3">
+        <div className="mb-3 form-item">
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
