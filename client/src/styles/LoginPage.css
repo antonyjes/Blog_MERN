@@ -10,3 +10,11 @@
 .form-login{
     padding: 5rem;
 }
+
+.change-login{
+    padding: 0 5rem;
+}
+
+.change-login p{
+    text-decoration: underline;
+}

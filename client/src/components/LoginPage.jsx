@@ -165,7 +165,7 @@ const LoginPage = () => {
           <button type="submit">{isLogin ? "LOGIN" : "REGISTER"}</button>
         </div>
       </form>
-      <div>
+      <div className="change-login" role="button">
         <p
           onClick={() => {
             setPageType(isLogin ? "register" : "login");
