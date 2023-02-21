@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Comment from "./Comment";
 import NavBar from "./NavBar";
 import "../styles/PostPage.css";
@@ -13,6 +13,7 @@ const PostPage = () => {
   const [showComments, setShowComments] = useState(false);
   const [addComment, setAddComment] = useState(false);
   const [comment, setComment] = useState("");
+  const navigate = useNavigate();
 
   const getPost = async (e) => {
     const response = await fetch(`http://localhost:3002/posts/${postId}`, {
@@ -79,7 +80,7 @@ const PostPage = () => {
         </div>
         {
           loggedInUserId === post.userId ? (<div>
-            <button type="button" className="btn btn-primary">Edit</button>
+            <button type="button" className="btn btn-primary" onClick={() => navigate(`/editpost/${postId}`) }>Edit</button>
             <button type="button" className="btn btn-danger">Delete</button>
           </div>) : null
         }
