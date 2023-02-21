@@ -77,6 +77,12 @@ const PostPage = () => {
           <h3>{post.title}</h3>
           <h5>{post.content}</h5>
         </div>
+        {
+          loggedInUserId === post.userId ? (<div>
+            <button type="button" className="btn btn-primary">Edit</button>
+            <button type="button" className="btn btn-danger">Delete</button>
+          </div>) : null
+        }
         <div className="comments-likes">
           <div onClick={() => setShowComments(!showComments)} role="button">
             <h6>Comments: {post.comments.length}</h6>
