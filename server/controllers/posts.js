@@ -111,3 +111,24 @@ export const commentPost = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+
+export const editPost = async (req, res) => {
+  try {
+    const {id} = req.params;
+    const {title, summary, content} = req.body;    
+    const post = await Post.findById(id);
+
+    let picturePath = post.picturePath;
+
+    if (req.file){
+      fs.unlinkSync(picturePath);
+      picturePath = req.file.path;
+    }
+
+    const updatedPost = await Post.findByIdAndUpdate(id, {title, summary, content, picturePath}, {new: true});
+    res.status(200).json(updatedPost);    
+  } catch (error) {
+    res.status(404).json({message: error.message});
+  }
+}
