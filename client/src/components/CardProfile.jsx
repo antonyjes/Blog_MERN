@@ -32,7 +32,7 @@ const CardProfile = ({ userId, picturePath }) => {
     <div className="card">
       <div onClick={() => navigate(`/profile/${userId}`)} role="button" className="card-image">
         <div className="user-image">
-          <img src={`http://localhost:3002/assets/${picturePath}`} alt="user" />
+          <img src={`http://localhost:3002/assets/users/${picturePath}`} alt="user" />
         </div>
         <div>
           <h2>

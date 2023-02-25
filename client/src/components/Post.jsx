@@ -47,7 +47,7 @@ const Post = ({
         >
           <div>
             <img
-              src={`http://localhost:3002/assets/${userPicturePath}`}
+              src={`http://localhost:3002/assets/users/${userPicturePath}`}
               alt=""
             />
           </div>
@@ -68,7 +68,7 @@ const Post = ({
         }}
       >
         <div className="content-img">
-          <img src={`http://localhost:3002/assets/${picturePath}`} alt="post" />
+          <img src={`http://localhost:3002/assets/posts/${picturePath}`} alt="post" />
         </div>
         <div>
           <h3>{title}</h3>

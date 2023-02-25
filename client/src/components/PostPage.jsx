@@ -70,7 +70,7 @@ const PostPage = () => {
       <div className="post-container">
         <div>
           <img
-            src={`http://localhost:3002/assets/${post.picturePath}`}
+            src={`http://localhost:3002/assets/posts/${post.picturePath}`}
             alt=""
           />
         </div>

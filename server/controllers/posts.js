@@ -1,12 +1,11 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 import fs from "fs-extra";
-import path from "path";
 
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
-    const { userId, title, summary, content, picturePath } = req.body;
+    const { userId, title, summary, content } = req.body;
     const user = await User.findById(userId);
     const newPost = new Post({
       userId,
@@ -17,7 +16,7 @@ export const createPost = async (req, res) => {
       summary,
       content,
       userPicturePath: user.picturePath,
-      picturePath,
+      picturePath: req.file ? req.file.filename : "",
       likes: {},
       comments: [],
     });
@@ -122,14 +121,18 @@ export const editPost = async (req, res) => {
 
     let befpicturePath = post.picturePath;
 
-    fs.unlink("./public/assets/" + befpicturePath, function (err) {
-      if (err) throw err;
-      console.log("File deleted!");
-    });
+    if (req.file) {
+      fs.unlink("./public/assets/posts/" + befpicturePath, function (err) {
+        if (err) throw err;
+        console.log("File deleted!");
+      });
+
+      befpicturePath = req.file.filename;
+    }
 
     const updatedPost = await Post.findByIdAndUpdate(
       id,
-      { title, summary, content, picturePath },
+      { title, summary, content, picturePath: befpicturePath },
       { new: true }
     );
     res.status(200).json(updatedPost);

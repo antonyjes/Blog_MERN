@@ -14,6 +14,7 @@ import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import { createPost, editPost } from "./controllers/posts.js";
+import { v4 as uuidv4 } from 'uuid';
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -31,21 +32,33 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 mongoose.set("strictQuery", true);
 
 /* FILE STORAGE */
-const storage = multer.diskStorage({
+const postStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/assets");
+    cb(null, "public/assets/posts");
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    const uniqueSuffix = Date.now() + "-" +uuidv4();
+    cb(null, uniqueSuffix + "-" + file.originalname);
   },
 });
 
-const upload = multer({ storage });
+const userStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/assets/users");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" +uuidv4();
+    cb(null, uniqueSuffix + "-" + file.originalname);
+  },
+});
+
+const postUpload = multer({ storage: postStorage });
+const userUpload = multer({ storage: userStorage})
 
 /* ROUTES WITH FILES */
-app.post("/auth/register", upload.single("picture"), register);
-app.post("/posts", verifyToken, upload.single("picture"), createPost);
-app.patch("/posts/:id/edit", verifyToken, upload.single("picture"), editPost);
+app.post("/auth/register", userUpload.single("picture"), register);
+app.post("/posts", verifyToken, postUpload.single("picture"), createPost);
+app.patch("/posts/:id/edit", verifyToken, postUpload.single("picture"), editPost);
 
 /* ROUTES */
 app.use("/auth", authRoutes);
