@@ -116,7 +116,7 @@ export const commentPost = async (req, res) => {
 export const editPost = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, summary, content, picturePath } = req.body;
+    const { title, summary, content } = req.body;
     const post = await Post.findById(id);
 
     let befpicturePath = post.picturePath;
