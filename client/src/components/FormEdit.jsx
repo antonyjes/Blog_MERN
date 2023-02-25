@@ -8,12 +8,13 @@ const FormEdit = ({ post, setPost }) => {
   const [title, setTitle] = useState(post.title);
   const [summary, setSummary] = useState(post.summary);
   const [content, setContent] = useState(post.content);
-  const [newImage, setNewImage] = useState(null);
+  const [newImage, setNewImage] = useState("");
   const [filename, setFilename] = useState(post.picturePath);
 
   const handleImageChange = (files) => {
     setNewImage(files[0]);
     setFilename(files[0].name);
+    console.log(newImage);
   };
 
   const handleSubmit = async (e) => {
@@ -22,10 +23,8 @@ const FormEdit = ({ post, setPost }) => {
     formData.append("title", title);
     formData.append("summary", summary);
     formData.append("content", content);
-    if (newImage) {
-      formData.append("picture", newImage);
-      formData.append("picturePath", filename);
-    }
+    formData.append("picture", newImage);
+    formData.append("picturePath", filename);
 
     const response = await fetch(
       `http://localhost:3002/posts/${post._id}/edit`,
@@ -76,7 +75,7 @@ const FormEdit = ({ post, setPost }) => {
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
-            onDrop={handleImageChange}
+            onDrop={(acceptedFiles) => handleImageChange(acceptedFiles)}
           >
             {({ getRootProps, getInputProps }) => (
               <div {...getRootProps()} className="mb-3">

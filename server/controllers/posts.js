@@ -1,5 +1,7 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import fs from "fs-extra";
+import path from "path";
 
 /* CREATE */
 export const createPost = async (req, res) => {
@@ -61,7 +63,7 @@ export const getPost = async (req, res) => {
 export const getFavoritesPosts = async (req, res) => {
   try {
     const { userId } = req.params;
-    const posts = await Post.find({[`likes.${userId}`] : true});;
+    const posts = await Post.find({ [`likes.${userId}`]: true });
     res.status(200).json(posts);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -112,23 +114,26 @@ export const commentPost = async (req, res) => {
   }
 };
 
-
 export const editPost = async (req, res) => {
   try {
-    const {id} = req.params;
-    const {title, summary, content} = req.body;    
+    const { id } = req.params;
+    const { title, summary, content, picturePath } = req.body;
     const post = await Post.findById(id);
 
-    let picturePath = post.picturePath;
+    let befpicturePath = post.picturePath;
 
-    if (req.file){
-      fs.unlinkSync(picturePath);
-      picturePath = req.file.path;
-    }
+    fs.unlink("./public/assets/" + befpicturePath, function (err) {
+      if (err) throw err;
+      console.log("File deleted!");
+    });
 
-    const updatedPost = await Post.findByIdAndUpdate(id, {title, summary, content, picturePath}, {new: true});
-    res.status(200).json(updatedPost);    
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      { title, summary, content, picturePath },
+      { new: true }
+    );
+    res.status(200).json(updatedPost);
   } catch (error) {
-    res.status(404).json({message: error.message});
+    res.status(404).json({ message: error.message });
   }
-}
+};
