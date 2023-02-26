@@ -30,7 +30,7 @@ const Favorites = () => {
   return (
     <div>
       <NavBar />
-      <div>
+      <div style={{padding: "3rem"}}>
         {posts.map(
           ({
             _id,

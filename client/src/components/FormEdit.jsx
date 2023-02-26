@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "../styles/SubmitPost.css";
 
 const FormEdit = ({ post, setPost }) => {
+  const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const [title, setTitle] = useState(post.title);
   const [summary, setSummary] = useState(post.summary);
@@ -37,6 +39,7 @@ const FormEdit = ({ post, setPost }) => {
     const updatedPost = await response.json();
     setPost(updatedPost);
     console.log("Post edited");
+    navigate("/home");
   };
 
   return (
