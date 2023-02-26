@@ -69,6 +69,27 @@ export const getFavoritesPosts = async (req, res) => {
   }
 };
 
+export const getImpressions = async (req, res) => {
+  try {
+    const {userId} = req.params;
+    const posts = await Post.find({userId});
+
+    let totalLikes = 0;
+
+    posts.forEach((post) => {
+      post.likes.forEach((value) => {
+        if (value === true) {
+          totalLikes++;
+        }
+      });
+    });
+
+    res.status(200).json({ totalLikes });
+  } catch (error) {
+    res.status(404).json({message: error.message});
+  }
+}
+
 /* UPDATE */
 export const likePost = async (req, res) => {
   try {

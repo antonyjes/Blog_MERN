@@ -35,7 +35,7 @@ const FriendList = ({ userId }) => {
             </h5>
             <div className="image-cont">
               <img
-                src={`http://localhost:3002/assets/${friend.picturePath}`}
+                src={`http://localhost:3002/assets/users/${friend.picturePath}`}
                 alt=""
               />
             </div>
