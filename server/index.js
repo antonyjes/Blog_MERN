@@ -15,6 +15,7 @@ import postRoutes from "./routes/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import { createPost, editPost } from "./controllers/posts.js";
 import { v4 as uuidv4 } from 'uuid';
+import { editUser } from "./controllers/users.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -57,6 +58,7 @@ const userUpload = multer({ storage: userStorage})
 
 /* ROUTES WITH FILES */
 app.post("/auth/register", userUpload.single("picture"), register);
+app.patch("/users/:id/edit", verifyToken, userUpload.single("picture"), editUser);
 app.post("/posts", verifyToken, postUpload.single("picture"), createPost);
 app.patch("/posts/:id/edit", verifyToken, postUpload.single("picture"), editPost);
 

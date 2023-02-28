@@ -7,6 +7,7 @@ import Profile from "components/Profile";
 import PostPage from "components/PostPage";
 import Favorites from "components/Favorites";
 import EditPost from "components/EditPost";
+import EditProfile from "components/EditProfile";
 
 function App() {
   const isAuth = Boolean(useSelector((state) => state.token));
@@ -39,6 +40,10 @@ function App() {
           <Route
             path="/editpost/:postId"
             element={isAuth ? <EditPost /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/edituser/:userId"
+            element={isAuth ? <EditProfile /> : <Navigate to="/" />}
           />
         </Routes>
       </BrowserRouter>
