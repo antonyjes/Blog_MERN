@@ -5,6 +5,8 @@ import Dropzone from "react-dropzone";
 import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import "../styles/SubmitPost.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const SubmitPost = () => {
   const navigate = useNavigate();
@@ -60,17 +62,6 @@ const SubmitPost = () => {
           />
         </div>
         <div className="mb-3 form-item">
-          <label htmlFor="">Content</label>
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></textarea>
-        </div>
-        <div className="mb-3 form-item">
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
@@ -88,6 +79,13 @@ const SubmitPost = () => {
             )}
           </Dropzone>
         </div>
+        <div className="mb-3 form-item">
+          <label htmlFor="">Content</label>
+          <ReactQuill
+            defaultValue={content}
+            onChange={(value) => setContent(value)}
+          />
+        </div>        
         <div>
           <button type="submit">ADD POST</button>
         </div>

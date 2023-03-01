@@ -3,6 +3,8 @@ import Dropzone from "react-dropzone";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../styles/SubmitPost.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const FormEdit = ({ post, setPost }) => {
   const navigate = useNavigate();
@@ -64,17 +66,6 @@ const FormEdit = ({ post, setPost }) => {
           />
         </div>
         <div className="mb-3 form-item">
-          <label htmlFor="">Content</label>
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></textarea>
-        </div>
-        <div className="mb-3 form-item">
           <Dropzone
             acceptedFiles=".jpg,.jpeg,.png"
             multiple={false}
@@ -87,6 +78,13 @@ const FormEdit = ({ post, setPost }) => {
               </div>
             )}
           </Dropzone>
+        </div>
+        <div className="mb-3 form-item">
+          <label htmlFor="">Content</label>
+          <ReactQuill
+            defaultValue={content}
+            onChange={(value) => setContent(value)}
+          />
         </div>
         <div>
           <button type="submit">SAVE</button>

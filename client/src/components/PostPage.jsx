@@ -76,7 +76,7 @@ const PostPage = () => {
         </div>
         <div className="content">
           <h3>{post.title}</h3>
-          <h5>{post.content}</h5>
+          <p dangerouslySetInnerHTML={{__html: post.content}}></p>
         </div>
         {
           loggedInUserId === post.userId ? (<div>
