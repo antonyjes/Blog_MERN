@@ -64,6 +64,19 @@ const PostPage = () => {
     setPost(updatedPost);
   };
 
+  const handleDelete = async (e) => {
+    const response = await fetch(`http://localhost:3002/posts/${postId}/delete`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+    console.log("Post deleted");
+    navigate("/home");
+  };
+
   return (
     <div>
       <NavBar />
@@ -76,14 +89,26 @@ const PostPage = () => {
         </div>
         <div className="content">
           <h3>{post.title}</h3>
-          <p dangerouslySetInnerHTML={{__html: post.content}}></p>
+          <p dangerouslySetInnerHTML={{ __html: post.content }}></p>
         </div>
-        {
-          loggedInUserId === post.userId ? (<div>
-            <button type="button" className="btn btn-primary" onClick={() => navigate(`/editpost/${postId}`) }>Edit</button>
-            <button type="button" className="btn btn-danger">Delete</button>
-          </div>) : null
-        }
+        {loggedInUserId === post.userId ? (
+          <div>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => navigate(`/editpost/${postId}`)}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </div>
+        ) : null}
         <div className="comments-likes">
           <div onClick={() => setShowComments(!showComments)} role="button">
             <h6>Comments: {post.comments.length}</h6>
